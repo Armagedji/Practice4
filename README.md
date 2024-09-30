@@ -25,6 +25,7 @@
 <img src="https://github.com/user-attachments/assets/74bb2476-f3c4-4c3b-bfec-eff58e366a54" width="200">
 
 При нажатии на кнопку "Загрузить изображение" откроется проводник телефона, где нужно будет выбрать новое изображение:
+
 <img src="https://github.com/user-attachments/assets/0aa7afb2-dc2c-4130-8492-3fb342649ff4" width="200">
 
 После нажатия кнопки "Добавить продукт" созданный элемент появится в списке семян.
