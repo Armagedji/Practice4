@@ -1,4 +1,4 @@
-import 'dart:io'; // Импортируйте пакет для работы с файлами
+import 'dart:io';
 import 'package:flutter/material.dart';
 import '../models/product.dart';
 
@@ -15,7 +15,7 @@ class ProductDetailScreen extends StatelessWidget {
         title: Text(product.title),
         actions: [
           IconButton(
-            icon: const Icon(Icons.delete), // Иконка удаления
+            icon: const Icon(Icons.delete),
             onPressed: () {
               showDialog(
                 context: context,
@@ -32,7 +32,7 @@ class ProductDetailScreen extends StatelessWidget {
                   actions: [
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop(); // Закрываем диалог
+                        Navigator.of(context).pop();
                       },
                       child: Text(
                         'Отмена',
@@ -41,9 +41,9 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        onRemoveProduct(product); // Вызываем функцию удаления
-                        Navigator.of(context).pop(); // Закрываем диалог
-                        Navigator.of(context).pop(); // Возврат на предыдущий экран
+                        onRemoveProduct(product);
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       },
                       child: Text(
                         'Удалить',
@@ -62,10 +62,9 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Проверяем, является ли image путем к файлу или именем ресурса
-            product.image.startsWith('assets/') // Проверка на путь к asset
-                ? Image.asset(product.image) // Используем Image.asset для изображений из assets
-                : Image.file(File(product.image)), // Используем Image.file для пользовательских изображений
+            product.image.startsWith('assets/')
+                ? Image.asset(product.image)
+                : Image.file(File(product.image)),
             const SizedBox(height: 16),
             Text(
               product.description,

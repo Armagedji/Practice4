@@ -16,7 +16,7 @@ class Product {
       title: json['title'],
       image: json['image'],
       description: json['description'],
-      shortDescription: json['short_description'],
+      shortDescription: json['shortDescription'],
     );
   }
 

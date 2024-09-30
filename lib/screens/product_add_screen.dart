@@ -23,7 +23,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      imagePath = pickedFile?.path; // Получение пути к выбранному изображению
+      imagePath = pickedFile?.path; 
     });
   }
 
@@ -33,7 +33,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
       appBar: AppBar(
         title: const Text('Добавить продукт'),
       ),
-      body: SingleChildScrollView( // Обернуть в SingleChildScrollView
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -69,7 +69,6 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Проверка на пустые значения
                   if (titleController.text.isEmpty || 
                       shortDescriptionController.text.isEmpty || 
                       descriptionController.text.isEmpty || 
@@ -79,21 +78,14 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                     );
                     return;
                   }
-
-                  // Отладка
-                  print("Создание нового продукта...");
-
                   final newProduct = Product(
                     title: titleController.text,
                     shortDescription: shortDescriptionController.text,
                     description: descriptionController.text,
                     image: imagePath!,
                   );
-
-                  print("Передача продукта в родительский виджет...");
-                  widget.onAddProduct(newProduct); // Передача нового продукта в родительский виджет
-                  print("Возврат назад...");
-                  Navigator.pop(context); // Возврат назад
+                  widget.onAddProduct(newProduct);
+                  Navigator.pop(context);
                 },
                 child: const Text('Добавить продукт'),
               ),
