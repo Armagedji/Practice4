@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import '../models/product.dart';
 
@@ -16,6 +17,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController shortDescriptionController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
   String? imagePath;
 
   final ImagePicker _picker = ImagePicker();
@@ -51,6 +53,12 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                 controller: descriptionController,
                 decoration: const InputDecoration(labelText: 'Описание'),
               ),
+              TextField(
+                controller: priceController,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                decoration: const InputDecoration(labelText: 'Цена'),
+              ),
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: _pickImage,
@@ -72,6 +80,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                   if (titleController.text.isEmpty || 
                       shortDescriptionController.text.isEmpty || 
                       descriptionController.text.isEmpty || 
+                      priceController.text.isEmpty ||
                       imagePath == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Пожалуйста, заполните все поля и выберите изображение.')),
@@ -82,6 +91,7 @@ class _ProductAddScreenState extends State<ProductAddScreen> {
                     title: titleController.text,
                     shortDescription: shortDescriptionController.text,
                     description: descriptionController.text,
+                    price: priceController.text,
                     image: imagePath!,
                   );
                   widget.onAddProduct(newProduct);

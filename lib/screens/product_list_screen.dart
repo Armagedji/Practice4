@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
+import 'package:flutter_market_alpha/models/shop_product.dart';
 import 'package:flutter_market_alpha/screens/favorite_product_screen.dart';
 import 'package:flutter_market_alpha/screens/profile_screen.dart';
+import 'package:flutter_market_alpha/screens/shopping_screen.dart';
 import '../data/data_loader.dart';
 import '../models/product.dart';
 import 'product_add_screen.dart';
 import 'product_detail_screen.dart';
-import 'profile_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
   @override
@@ -16,7 +18,8 @@ class ProductListScreen extends StatefulWidget {
 class _ProductListScreenState extends State<ProductListScreen> {
   List<Product> products = [];
   List<Product> favoriteProducts = [];
-  int _selectedIndex = 0;  // Переменная для отслеживания текущей вкладки
+  List<ShopProduct> shoppingProducts = [];
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -64,7 +67,18 @@ class _ProductListScreenState extends State<ProductListScreen> {
     });
   }
 
-  // Функция для переключения вкладок
+  void _addShop(Product product) {
+  setState(() {
+    var existingProduct = shoppingProducts.firstWhereOrNull(
+      (shopProduct) => shopProduct.product.title == product.title);
+    if (existingProduct != null) {
+      existingProduct.quantity++;
+    } else {
+      shoppingProducts.add(ShopProduct(product, 1));
+    }
+  });
+}
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -73,7 +87,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Страница для отображения продуктов
     final List<Widget> _pages = [
       Scaffold(
         appBar: AppBar(
@@ -85,6 +98,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ProductAddScreen(onAddProduct: _addProduct)),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.shopping_basket_rounded),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ShoppingScreen(shoppingProducts: shoppingProducts)),
                 );
               },
             ),
@@ -150,6 +172,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                   ),
                                   onPressed: () => _toggleFavorite(products[index]),
                                 ),
+                                IconButton(
+                                  icon: const Icon(Icons.add_shopping_cart_rounded),
+                                  onPressed: () => _addShop(products[index]),
+                                ),
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {
@@ -180,14 +206,14 @@ class _ProductListScreenState extends State<ProductListScreen> {
         ),
       ),
       FavoriteProductsScreen(favoriteProducts: favoriteProducts), 
-      ProfileScreen() // Экран с избранными продуктами
+      ProfileScreen()
     ];
 
     return Scaffold(
-      body: _pages[_selectedIndex],  // Отображаем страницу в зависимости от выбранной вкладки
+      body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,  // Обработчик для переключения вкладок
+        onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

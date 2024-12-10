@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';  // Импортируем ImagePicker
+import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -15,7 +15,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   final ImagePicker _picker = ImagePicker();
 
-  // Функция для выбора изображения
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -25,10 +24,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  // Функция для сохранения профиля
   void _saveProfile() {
     if (_formKey.currentState!.validate()) {
-      // Сохранение изменений профиля (например, отправка на сервер)
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Профиль сохранен')));
     }
   }
@@ -46,7 +43,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Фотография профиля
                 GestureDetector(
                   onTap: _pickImage,
                   child: CircleAvatar(
@@ -57,12 +53,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                // Форма для редактирования профиля
                 Form(
                   key: _formKey,
                   child: Column(
                     children: [
-                      // Имя
                       TextFormField(
                         initialValue: username,
                         decoration: const InputDecoration(
@@ -81,7 +75,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                       const SizedBox(height: 16),
-                      // Email
                       TextFormField(
                         initialValue: email,
                         decoration: const InputDecoration(
@@ -103,7 +96,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                       const SizedBox(height: 24),
-                      // Кнопка сохранения
                       ElevatedButton(
                         onPressed: _saveProfile,
                         child: const Text('Сохранить'),
