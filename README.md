@@ -2,33 +2,21 @@
 
 ## Удаление элемента
 
-### Отдельное окно продукта
-<img src="https://github.com/user-attachments/assets/b67600ea-79bf-4d2d-8b26-bfc5c1dc58ec" width="200">
+### Изначальное окно
 
-Можно увидеть, что в правом верхнем углу есть иконка с изображением мусорной корзины (удаление).
+<img src="https://github.com/user-attachments/assets/a48289a9-ed3d-4cab-9e9f-393cff8403c5" width="200">
 
-### Окно подтверждения
-<img src="https://github.com/user-attachments/assets/11ddbb92-bbeb-46bc-a3c1-aac8d69d777c" width="200">
+### Добавление двух элементов в избранное
 
-При нажатии на иконку появится окно подтверждения. Если нажать кнопку удалить, элемент исчезнет из списка:
+<img src="https://github.com/user-attachments/assets/f1bb1961-6063-4aef-a728-9dd132d6484f" width="200">
 
-<img src="https://github.com/user-attachments/assets/367c39ee-9c5f-4abe-8dae-9d10a842ee4b" width="200">
+### Вкладка с избранными продуктами
 
-## Добавление элемента
+<img src="https://github.com/user-attachments/assets/65323d23-b76e-4ce0-8dba-0e5695f5b694" width="200">
 
-### Фотография списка семян
-<img src="https://github.com/user-attachments/assets/2d6d3b39-2c8b-4d66-87f0-e80c9f1b6f97" width="200">
+## Окно профиля
 
-В правом верхнем углу в списке семян есть кнопка с плюсиком. При нажатии на него нас перекидывает на новую страницу с добавлением продукта.
+### Простое окно профиля с возможностью выбора изображения и изменением имени/почты
 
-### Страница добавления продукта
-<img src="https://github.com/user-attachments/assets/74bb2476-f3c4-4c3b-bfec-eff58e366a54" width="200">
+<img src="https://github.com/user-attachments/assets/1ff978f6-71b3-4271-9677-467c58aa48fb" width="200">
 
-При нажатии на кнопку "Загрузить изображение" откроется проводник телефона, где нужно будет выбрать новое изображение:
-
-<img src="https://github.com/user-attachments/assets/0aa7afb2-dc2c-4130-8492-3fb342649ff4" width="200">
-
-После нажатия кнопки "Добавить продукт" созданный элемент появится в списке семян.
-| Новый элемент в списке  | Страница нового элемента |
-| ------------- | ------------- |
-|<img src="https://github.com/user-attachments/assets/66a7a5a2-3e16-4f32-979b-763a4c7a337e" width="200"> | <img src="https://github.com/user-attachments/assets/6533036e-7b60-4394-89c7-f539a9fb5903" width="200"> |
