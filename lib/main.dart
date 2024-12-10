@@ -35,17 +35,21 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: FutureBuilder<List<Product>>(
-        future: loadProducts(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return const Center(child: Text('Ошибка при загрузке информации'));
-          } else {
-            return ProductListScreen();
-          }
-        },
-      ),
+  future: loadProducts(),
+  builder: (context, snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const Center(child: CircularProgressIndicator());
+    } else if (snapshot.hasError) {
+      // Логируем ошибку для отладки
+      print('Ошибка при загрузке данных: ${snapshot.error}');
+      return const Center(child: Text('Ошибка при загрузке информации'));
+    } else if (snapshot.hasData) {
+      return ProductListScreen();
+    } else {
+      return const Center(child: Text('Нет данных'));
+    }
+  },
+),
     );
   }
 }

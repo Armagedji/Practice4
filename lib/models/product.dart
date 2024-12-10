@@ -3,12 +3,14 @@ class Product {
   final String image;
   final String description;
   final String shortDescription;
+  bool isFavorite;
 
-  const Product({
+  Product({
     required this.title,
     required this.image,
     required this.description,
     required this.shortDescription,
+    this.isFavorite = false,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -17,6 +19,7 @@ class Product {
       image: json['image'],
       description: json['description'],
       shortDescription: json['shortDescription'],
+      isFavorite: json['isFavorite'] ?? false,
     );
   }
 
@@ -26,6 +29,7 @@ class Product {
       'shortDescription': shortDescription,
       'description': description,
       'image': image,
+      'isFavorite': isFavorite
     };
   }
 }

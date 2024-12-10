@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_market_alpha/screens/favorite_product_screen.dart';
 import '../data/data_loader.dart';
 import '../models/product.dart';
 import 'product_add_screen.dart';
@@ -12,6 +13,7 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreenState extends State<ProductListScreen> {
   List<Product> products = [];
+  List<Product> favoriteProducts = [];
 
   @override
   void initState() {
@@ -38,14 +40,25 @@ class _ProductListScreenState extends State<ProductListScreen> {
     setState(() {
       products.add(product);
     });
-    _saveProducts(); 
+    _saveProducts();
   }
 
   void _removeProduct(Product product) {
     setState(() {
       products.remove(product);
     });
-    _saveProducts(); 
+    _saveProducts();
+  }
+
+  void _toggleFavorite(Product product) {
+    setState(() {
+      product.isFavorite = !product.isFavorite;
+      if (product.isFavorite) {
+        favoriteProducts.add(product);
+      } else {
+        favoriteProducts.remove(product);
+      }
+    });
   }
 
   @override
@@ -54,6 +67,15 @@ class _ProductListScreenState extends State<ProductListScreen> {
       appBar: AppBar(
         title: const Text('Перечень семян'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FavoriteProductsScreen(favoriteProducts: favoriteProducts)),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
@@ -114,21 +136,34 @@ class _ProductListScreenState extends State<ProductListScreen> {
                             style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           const SizedBox(height: 16),
-                          Center(
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProductDetailScreen(
-                                      product: products[index],
-                                      onRemoveProduct: _removeProduct,
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: const Text('Прочитать подробнее'),
-                            ),
+                          Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  products[index].isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: products[index].isFavorite ? Colors.red : null,
+                                ),
+                                onPressed: () => _toggleFavorite(products[index]),
+                              ),
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ProductDetailScreen(
+                                          product: products[index],
+                                          onRemoveProduct: _removeProduct,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Прочитать подробнее'),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
